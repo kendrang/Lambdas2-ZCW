@@ -1,8 +1,11 @@
 import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class Person {
+
+
 
     public enum Sex {
         MALE, FEMALE
@@ -12,6 +15,9 @@ public class Person {
     LocalDate birthday;
     Sex gender;
     String emailAddress;
+
+
+
     ArrayList<Person> peopleList = new ArrayList<>();
 
     public Person(String name, LocalDate birthday, Sex gender, String emailAddress) {
@@ -52,6 +58,33 @@ public class Person {
         this.emailAddress = emailAddress;
     }
 
+    public Integer getAge(){
+     return Period.between (birthday, LocalDate.now()).getYears();
+    }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", birthday=" + birthday +
+                ", gender=" + gender +
+                ", emailAddress='" + emailAddress + '\'' +
+                '}';
+    }
 
+    public static void printPersons(ArrayList<Person> peopleList, checkPerson tester) {
+        for (Person p : peopleList) {
+            if (tester.test(p)) {
+                p.toString();
+            }
+        }
+    }
+
+    public ArrayList<Person> getPeopleList() {
+        return peopleList;
+    }
+
+    public void setPeopleList(ArrayList<Person> peopleList) {
+        this.peopleList = peopleList;
+    }
 }
